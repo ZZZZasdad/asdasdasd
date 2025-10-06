@@ -48,15 +48,11 @@ game:GetService("Lighting"):ClearAllChildren()
 for _, v in ipairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
     if not table.find(guiWhitelist, v.Name) then
         v:Destroy()
-    else
-        v.Enabled = false
     end
 end
 game.Players.LocalPlayer.PlayerGui.ChildAdded:Connect(function(v)
     if not table.find(guiWhitelist, v.Name) then
         v:Destroy()
-    else
-        v.Enabled = false
     end
 end)
 game:GetService("Players").LocalPlayer.PlayerScripts.Other:ClearAllChildren()
