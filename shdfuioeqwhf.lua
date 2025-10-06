@@ -1,4 +1,5 @@
-local blacklist = {"Camera", "Terrain", "Plots", "Players"}
+local blacklist = {"Camera", "Terrain", "Plots", "Players","ScriptedMap"}
+local guiWhitelist = { "HUD", "Main" }
 for i, v in workspace:GetChildren() do
     if not table.find(blacklist, v.Name) then
         v:Destroy()
@@ -44,9 +45,15 @@ game:GetService("Players").ChildAdded:Connect(function(v)
     end
 end)
 game:GetService("Lighting"):ClearAllChildren()
-game:GetService("Players").LocalPlayer.PlayerGui:ClearAllChildren()
-game:GetService("Players").LocalPlayer.PlayerGui.ChildAdded:Connect(function(v)
-    v:Destroy()
+for _, v in ipairs(game.Player.LocalPlayer.PlayerGui:GetChildren()) do
+    if not table.find(guiWhitelist, v.Name) then
+        v:Destroy()
+    end
+end
+game.Player.LocalPlayer.PlayerGui.ChildAdded:Connect(function(v)
+    if not table.find(guiWhitelist, v.Name) then
+        v:Destroy()
+    end
 end)
 game:GetService("Players").LocalPlayer.PlayerScripts.Other:ClearAllChildren()
     for i, v in next, workspace:GetDescendants() do
