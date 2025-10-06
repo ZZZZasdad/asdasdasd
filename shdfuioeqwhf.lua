@@ -45,12 +45,12 @@ game:GetService("Players").ChildAdded:Connect(function(v)
     end
 end)
 game:GetService("Lighting"):ClearAllChildren()
-for _, v in ipairs(game.Player.LocalPlayer.PlayerGui:GetChildren()) do
+for _, v in ipairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
     if not table.find(guiWhitelist, v.Name) then
         v:Destroy()
     end
 end
-game.Player.LocalPlayer.PlayerGui.ChildAdded:Connect(function(v)
+game.Players.LocalPlayer.PlayerGui.ChildAdded:Connect(function(v)
     if not table.find(guiWhitelist, v.Name) then
         v:Destroy()
     end
