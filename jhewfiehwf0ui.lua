@@ -1,3 +1,4 @@
+getgenv().UI = true
 game:GetService("RunService"):Set3dRenderingEnabled(false)
 local gui = Instance.new("ScreenGui")
 gui.Name = tostring(math.random(100000,999999))
