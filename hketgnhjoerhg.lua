@@ -91,4 +91,4 @@ end)
 for i, e in pairs(l:GetChildren()) do if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then e.Enabled = false end end
 game.Lighting.ChildAdded:Connect(function(v) if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then v.Enabled = false end end)
 local function PlayerPlot() for i,v in ipairs(workspace.Plots:GetChildren()) do if v:GetAttribute("Owner") == game.Players.LocalPlayer.Name then return v end end end
-for i1,v1 in ipairs(PlayerPlot().Rows:GetChildren()) do if v1:IsA("Folder") then for i2,v2 in ipairs(v1:GetChildren()) do if v2.Name ~= "Grass" then v2:Destroy() end end end end
+for i1,v1 in ipairs(PlayerPlot().Rows:GetChildren()) do if v1:IsA("Folder") then for i2,v2 in ipairs(v1:GetChildren()) do if v2.Name ~= "Grass" and v2.Name ~= "Button" then v2:Destroy() end end end end
