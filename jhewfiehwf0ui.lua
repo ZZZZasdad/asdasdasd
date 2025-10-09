@@ -11,18 +11,18 @@ local frame = Instance.new("Frame")
 frame.Size = UDim2.new(1, 0, 1, 0)
 frame.Position = UDim2.new(0, 0, 0, 0)
 frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-frame.BackgroundTransparency = 0.35
+frame.BackgroundTransparency = 0
 frame.BorderSizePixel = 0
 frame.Name = tostring(math.random(100000,999999))
 frame.Parent = gui
 local title = Instance.new("TextLabel")
 title.AnchorPoint = Vector2.new(0.5, 0.5)
-title.Position = UDim2.new(0.5, 0, 0.2, 0)
+title.Position = UDim2.new(0.5, 0, 0.3, 0)
 title.Size = UDim2.new(1, 0, 0, 50)
 title.BackgroundTransparency = 1
 title.Text = "discord.gg/YuukiHub"
 title.Font = Enum.Font.GothamBold
-title.TextSize = 72
+title.TextSize = 50
 title.TextColor3 = Color3.fromRGB(175, 187, 230)
 title.Name = tostring(math.random(100000,999999))
 title.Parent = frame
@@ -48,11 +48,6 @@ for i, stat in ipairs(stats) do
     label.Parent = frame
     statLabels[stat] = label
 end
-local blur = Instance.new("BlurEffect")
-blur.Size = 50
-blur.Parent = game.Lighting
-blur.Enabled = true
-blur.Name = tostring(math.random(100000,999999))
 local Data = require(game:GetService("ReplicatedStorage").PlayerData).GetData().Data
 function getDefeated() return tonumber(Data.Defeated) end
 function getMoney() return tonumber(Data.Money) end
