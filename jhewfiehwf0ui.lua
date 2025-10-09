@@ -59,7 +59,7 @@ function getMoney() return tonumber(Data.Money) end
 function getRebirth() return tonumber(Data.Rebirth) - 1 end
 function getTotalDamage() return tonumber(game.Players.LocalPlayer:GetAttribute("TotalDamage")) end
 task.spawn(function()
-    while task.wait(0.1) do
+    while task.wait(5) do
         statLabels["Defeated"].Text = "Defeated: "..tostring(getDefeated())
         statLabels["Money"].Text = "Money: "..tostring(getMoney())
         statLabels["Rebirth"].Text = "Rebirth: "..tostring(getRebirth())
