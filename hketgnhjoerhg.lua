@@ -13,7 +13,7 @@ workspace.Players.ChildAdded:Connect(function(v) if v.Name ~= game.Players.Local
 workspace.Plots.ChildAdded:Connect(function(v) if v:GetAttribute("Owner") ~= game.Players.LocalPlayer.Name then v:Destroy() end end)
 workspace.ChildAdded:Connect(function(v) if not table.find(blacklist, v.Name) then v:Destroy() elseif v.Name == "ScriptedMap" then v.ChildAdded:Connect(function(c) if c.Name ~= "Countdowns" and c.Name ~= "Brainrots" then c:Destroy() end end) end end)
 workspace.ChildAdded:Connect(function(v) if not table.find(blacklist, v.Name) then v:Destroy() end end)
-for _, v in ipairs(workspace.Plots:GetChildren()) do for _, sub in ipairs(v:GetChildren()) do if not table.find({"Brainrots", "Plants", "Rows"}, sub.Name) then sub:Destroy() end end end
+for _, v in ipairs(workspace.Plots:GetChildren()) do for _, sub in ipairs(v:GetChildren()) do if not table.find({"Brainrots", "Plants", "Rows","EventPlatforms","Origin"}, sub.Name) then sub:Destroy() end end end
 for i, v in game:GetService("Players"):GetChildren() do if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end
 game:GetService("Players").ChildAdded:Connect(function(v) if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end)
 game:GetService("Lighting"):ClearAllChildren()
