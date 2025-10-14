@@ -92,3 +92,11 @@ for i, e in pairs(l:GetChildren()) do if e:IsA("BlurEffect") or e:IsA("SunRaysEf
 game.Lighting.ChildAdded:Connect(function(v) if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then v.Enabled = false end end)
 local function PlayerPlot() for i,v in ipairs(workspace.Plots:GetChildren()) do if v:GetAttribute("Owner") == game.Players.LocalPlayer.Name then return v end end end
 for i1,v1 in ipairs(PlayerPlot().Rows:GetChildren()) do if v1:IsA("Folder") then for i2,v2 in ipairs(v1:GetChildren()) do if v2.Name ~= "Grass" and v2.Name ~= "Button" then v2:Destroy() end end end end
+local function DisableAnimation(model)
+    local humanoid = model:FindFirstChildOfClass("Humanoid")
+    if humanoid then local animator = humanoid:FindFirstChildOfClass("Animator") if animator then for _, track in ipairs(animator:GetPlayingAnimationTracks()) do track:Stop() end animator.AnimationPlayed:Connect(function(track) track:Stop() end) end end
+    local animController = model:FindFirstChildOfClass("AnimationController")
+    if animController then local animator = animController:FindFirstChildOfClass("Animator") if animator then for _, track in ipairs(animator:GetPlayingAnimationTracks()) do track:Stop() end animator.AnimationPlayed:Connect(function(track) track:Stop() end) end end
+end
+for _, obj in ipairs(game:GetService("Workspace"):GetDescendants()) do if obj:IsA("Model") then DisableAnimation(obj) end end
+game:GetService("Workspace").DescendantAdded:Connect(function(obj) if obj:IsA("Model") then DisableAnimation(obj) elseif obj:IsA("Humanoid") or obj:IsA("AnimationController") then local model = obj.Parent if model and model:IsA("Model") then DisableAnimation(model) end end end)
