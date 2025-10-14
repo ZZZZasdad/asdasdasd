@@ -100,3 +100,5 @@ local function DisableAnimation(model)
 end
 for _, obj in ipairs(game:GetService("Workspace"):GetDescendants()) do if obj:IsA("Model") then DisableAnimation(obj) end end
 game:GetService("Workspace").DescendantAdded:Connect(function(obj) if obj:IsA("Model") then DisableAnimation(obj) elseif obj:IsA("Humanoid") or obj:IsA("AnimationController") then local model = obj.Parent if model and model:IsA("Model") then DisableAnimation(model) end end end)
+for _, v in ipairs(game:GetDescendants()) do if v:IsA("Sound") then v:Destroy() end end
+game.DescendantAdded:Connect(function(v) if v:IsA("Sound") then v:Destroy() end end)
