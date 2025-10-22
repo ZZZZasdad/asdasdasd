@@ -6,8 +6,8 @@ workspace.ChildAdded:Connect(function(v) task.wait(1) SafeDestroy(v) end)
 for i, v in game:GetService("Players"):GetChildren() do if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end
 game:GetService("Players").ChildAdded:Connect(function(v) task.wait(1) if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end)
 game:GetService("Lighting"):ClearAllChildren()
-for _,v in ipairs(game:GetService("Players").LocalPlayer.PlayerGui:GetChildren()) do if v.Enabled then v.Enabled = false end end
-game:GetService("Players").LocalPlayer.PlayerGui.ChildAdded:Connect(function(v) if v.Enabled then v.Enabled = false end end)
+for _,v in ipairs(game:GetService("Players").LocalPlayer.PlayerGui:GetChildren()) do if v:IsA("GuiObject") and v.Enabled then v.Enabled = false end end
+game:GetService("Players").LocalPlayer.PlayerGui.ChildAdded:Connect(function(v) if v:IsA("GuiObject") and v.Enabled then v.Enabled = false end end)
 for i, v in next, workspace:GetDescendants() do pcall(function() v.Transparency = 1 end) end
 a = workspace
 a.DescendantAdded:Connect(function(v) pcall(function() v.Transparency = 1 end) end)
