@@ -1,10 +1,4 @@
 getgenv().LowCPU = true
-local blacklist = {"Camera", "Terrain", game.Players.LocalPlayer.Name}
-local function SafeDestroy(v) if v and v.Parent and v:IsDescendantOf(workspace) then if not table.find(blacklist, v.Name) then if v:GetAttribute("MapID") then for _, child in ipairs(v:GetChildren()) do if child.Name ~= "CoinContainer" then child:Destroy() end end else v:Destroy() end end end end
-for _, v in ipairs(workspace:GetChildren()) do SafeDestroy(v) end
-workspace.ChildAdded:Connect(function(v) task.wait(1) SafeDestroy(v) end)
-for i, v in game:GetService("Players"):GetChildren() do if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end
-game:GetService("Players").ChildAdded:Connect(function(v) task.wait(1) if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end)
 game:GetService("Lighting"):ClearAllChildren()
 for i, v in next, workspace:GetDescendants() do pcall(function() v.Transparency = 1 end) end
 a = workspace
