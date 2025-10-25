@@ -12,13 +12,13 @@ end
 workspace.Players.ChildAdded:Connect(function(v) if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end)
 workspace.Plots.ChildAdded:Connect(function(v) if v:GetAttribute("Owner") ~= game.Players.LocalPlayer.Name then v:Destroy() end end)
 workspace.ChildAdded:Connect(function(v) if not table.find(blacklist, v.Name) then v:Destroy() elseif v.Name == "ScriptedMap" then v.ChildAdded:Connect(function(c) if c.Name ~= "Countdowns" and c.Name ~= "Brainrots" then c:Destroy() end end) end end)
-workspace.ChildAdded:Connect(function(v) if not table.find(blacklist, v.Name) then v:Destroy() end end)
 for _, v in ipairs(workspace.Plots:GetChildren()) do for _, sub in ipairs(v:GetChildren()) do if not table.find({"Brainrots", "Plants", "Rows","EventPlatforms","Origin"}, sub.Name) then sub:Destroy() end end end
 for i, v in game:GetService("Players"):GetChildren() do if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end
 game:GetService("Players").ChildAdded:Connect(function(v) if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end)
 game:GetService("Lighting"):ClearAllChildren()
-game:GetService("Players").LocalPlayer.PlayerGui:ClearAllChildren()
-game:GetService("Players").LocalPlayer.PlayerGui.ChildAdded:Connect(function(v) v:Destroy()end)
+local w=game.Players.LocalPlayer.PlayerGui.Main.PosterGui.Frame.Main.WantedItem.WantedItem_Title
+for _,v in ipairs(game.Players.LocalPlayer.PlayerGui:GetDescendants())do if v~=w and not w:IsDescendantOf(v)then v:Destroy()end end
+game.Players.LocalPlayer.PlayerGui.DescendantAdded:Connect(function(v)if v~=w and not w:IsDescendantOf(v)then v:Destroy()end end)
 game:GetService("Players").LocalPlayer.PlayerScripts.Other:ClearAllChildren()
 for i, v in next, workspace:GetDescendants() do pcall(function() v.Transparency = 1 end) end
 a = workspace
