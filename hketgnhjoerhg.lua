@@ -16,9 +16,9 @@ for _, v in ipairs(workspace.Plots:GetChildren()) do for _, sub in ipairs(v:GetC
 for i, v in game:GetService("Players"):GetChildren() do if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end
 game:GetService("Players").ChildAdded:Connect(function(v) if v.Name ~= game.Players.LocalPlayer.Name then v:Destroy() end end)
 game:GetService("Lighting"):ClearAllChildren()
-local w=game.Players.LocalPlayer.PlayerGui.Main.PosterGui.Frame.Main.WantedItem.WantedItem_Title
-for _,v in ipairs(game.Players.LocalPlayer.PlayerGui:GetDescendants())do if v~=w and not w:IsDescendantOf(v)then v:Destroy()end end
-game.Players.LocalPlayer.PlayerGui.DescendantAdded:Connect(function(v)if v~=w and not w:IsDescendantOf(v)then v:Destroy()end end)
+local wanted=game.Players.LocalPlayer.PlayerGui.Main.PosterGui.Frame.Main.WantedItem.WantedItem_Title
+for _,v in ipairs(game.Players.LocalPlayer.PlayerGui:GetDescendants())do if v~=wanted and not wanted:IsDescendantOf(v)then v:Destroy()end end
+game.Players.LocalPlayer.PlayerGui.DescendantAdded:Connect(function(v)if v~=wanted and not wanted:IsDescendantOf(v)then v:Destroy()end end)
 game:GetService("Players").LocalPlayer.PlayerScripts.Other:ClearAllChildren()
 for i, v in next, workspace:GetDescendants() do pcall(function() v.Transparency = 1 end) end
 a = workspace
