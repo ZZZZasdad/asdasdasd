@@ -17,16 +17,16 @@ frame.Name = tostring(math.random(100000,999999))
 frame.Parent = gui
 local title = Instance.new("TextLabel")
 title.AnchorPoint = Vector2.new(0.5, 0.5)
-title.Position = UDim2.new(0.5, 0, 0.2, 0)
+title.Position = UDim2.new(0.5, 0, 0.3, 0)
 title.Size = UDim2.new(1, 0, 0, 50)
 title.BackgroundTransparency = 1
 title.Text = "discord.gg/YuukiHub"
 title.Font = Enum.Font.GothamBold
-title.TextSize = 72
+title.TextSize = 50
 title.TextColor3 = Color3.fromRGB(175, 187, 230)
 title.Name = tostring(math.random(100000,999999))
 title.Parent = frame
-local stats = {"Play Time", "Halloween Points", "Tier"}
+local stats = {"Play Time", "Total Candies", "Tier"}
 local statLabels = {}
 local colors = {
     Color3.fromRGB(200, 0, 0),
@@ -69,7 +69,7 @@ task.spawn(function()
 		local seconds = math.floor(elapsed % 60)
 		local playTime = string.format("%02dh %02dm %02ds", hours, minutes, seconds)
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
-		if statLabels["Halloween Points"] then statLabels["Halloween Points"].Text = "Halloween Points: " .. tostring(GetDataHalloween()) end
+		if statLabels["Total Candies"] then statLabels["Total Candies"].Text = "Total Candies: " .. tostring(GetDataHalloween()) end
         if statLabels["Tier"] then statLabels["Tier"].Text = "Battle Pass Tier: " .. tostring(GetDataTier()) end
 	end
 end)
