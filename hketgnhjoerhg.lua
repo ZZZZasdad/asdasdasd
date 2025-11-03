@@ -1,4 +1,5 @@
 getgenv().LowCPU = true
+task.wait(8)
 local blacklist = {"Camera", "Terrain", "Plots", "Players", "ScriptedMap"}
 for i, v in workspace:GetChildren() do
     if not table.find(blacklist, v.Name) then v:Destroy() end
