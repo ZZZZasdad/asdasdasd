@@ -1,5 +1,4 @@
 getgenv().LowCPU = true
-task.wait(8)
 local blacklist = {"Camera", "Terrain", "Plots", "Players", "ScriptedMap"}
 for i, v in workspace:GetChildren() do
     if not table.find(blacklist, v.Name) then v:Destroy() end
@@ -100,3 +99,4 @@ local function DisableAnimation(model)
 end
 for _, obj in ipairs(game:GetService("Workspace"):GetDescendants()) do if obj:IsA("Model") then DisableAnimation(obj) end end
 game:GetService("Workspace").DescendantAdded:Connect(function(obj) if obj:IsA("Model") then DisableAnimation(obj) elseif obj:IsA("Humanoid") or obj:IsA("AnimationController") then local model = obj.Parent if model and model:IsA("Model") then DisableAnimation(model) end end end)
+getgenv().LowCPU_Loaded = true
