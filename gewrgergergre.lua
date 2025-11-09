@@ -26,11 +26,12 @@ title.TextSize = 50
 title.TextColor3 = Color3.fromRGB(175, 187, 230)
 title.Name = tostring(math.random(100000,999999))
 title.Parent = frame
-local stats = {"Play Time", "Total Candies"}
+local stats = {"Play Time", "Total Candies", "Coins Bag"}
 local statLabels = {}
 local colors = {
     Color3.fromRGB(200, 0, 0),
     Color3.fromRGB(0, 200, 0),
+    Color3.fromRGB(68, 0, 255),
 }
 for i, stat in ipairs(stats) do
     local label = Instance.new("TextLabel")
@@ -53,6 +54,21 @@ local function GetDataHalloween()
 	end
 	return 0
 end
+local plr = game.Players.LocalPlayer
+local function GetCoinsBag()
+    local pcFull = plr.PlayerGui.MainGUI:FindFirstChild("Lobby")
+        and plr.PlayerGui.MainGUI.Lobby:FindFirstChild("Dock")
+        and plr.PlayerGui.MainGUI.Lobby.Dock:FindFirstChild("CoinBags")
+        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container
+        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.Candy
+        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.Candy.CurrencyFrame.Icon.Coins
+    local mobileFull = plr.PlayerGui.MainGUI:FindFirstChild("Game")
+        and plr.PlayerGui.MainGUI.Game:FindFirstChild("CoinBags")
+        and plr.PlayerGui.MainGUI.Game.CoinBags.Container
+        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.Candy
+        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.Candy.CurrencyFrame.Icon.Coins
+    return (pcFull and pcFull.ContentText) or (mobileFull and mobileFull.ContentText)
+end
 local startTime = tick()
 task.spawn(function()
 	while task.wait(1) do
@@ -63,5 +79,6 @@ task.spawn(function()
 		local playTime = string.format("%02dh %02dm %02ds", hours, minutes, seconds)
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
 		if statLabels["Total Candies"] then statLabels["Total Candies"].Text = "Total Candies: " .. tostring(GetDataHalloween()) end
+        if statLabels["Coins Bag"] then statLabels["Coins Bag"].Text = "Coins Bag: " .. tostring(GetCoinsBag()) end
 	end
 end)
