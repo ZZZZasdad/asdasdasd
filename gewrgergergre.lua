@@ -26,12 +26,13 @@ title.TextSize = 50
 title.TextColor3 = Color3.fromRGB(175, 187, 230)
 title.Name = tostring(math.random(100000,999999))
 title.Parent = frame
-local stats = {"Play Time", "Total Candies", "Coins Bag"}
+local stats = {"Play Time", "Total Candies", "Coins Bag", "Game Started"}
 local statLabels = {}
 local colors = {
     Color3.fromRGB(200, 0, 0),
     Color3.fromRGB(0, 200, 0),
     Color3.fromRGB(68, 0, 255),
+    Color3.fromRGB(0, 217, 255),
 }
 for i, stat in ipairs(stats) do
     local label = Instance.new("TextLabel")
@@ -69,9 +70,10 @@ local function GetCoinsBag()
         and plr.PlayerGui.MainGUI.Game.CoinBags.Container.Candy.CurrencyFrame.Icon.Coins
     return (pcFull and pcFull.ContentText) or (mobileFull and mobileFull.ContentText)
 end
+local function CheckStartGame() for i1, v1 in ipairs(workspace:GetDescendants()) do if v1:GetAttribute("MapID") then return true end end return false end
 local startTime = tick()
 task.spawn(function()
-	while task.wait(1) do
+	while task.wait(10) do
 		local elapsed = tick() - startTime
 		local hours = math.floor(elapsed / 3600)
 		local minutes = math.floor((elapsed % 3600) / 60)
@@ -80,5 +82,6 @@ task.spawn(function()
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
 		if statLabels["Total Candies"] then statLabels["Total Candies"].Text = "Total Candies: " .. tostring(GetDataHalloween()) end
         if statLabels["Coins Bag"] then statLabels["Coins Bag"].Text = "Coins Bag: " .. tostring(GetCoinsBag()) end
+        if statLabels["Game Started"] then statLabels["Game Started"].Text = "Game Started: " .. tostring(CheckStartGame()) end
 	end
 end)
