@@ -55,6 +55,15 @@ local function GetDataHalloween()
 	end
 	return 0
 end
+local function TrackFarmedCandies()
+    getgenv().LastCandies = getgenv().LastCandies or GetDataHalloween()
+    getgenv().TotalFarmed = getgenv().TotalFarmed or 0
+    local cur = GetDataHalloween()
+    local diff = cur - getgenv().LastCandies
+    if diff > 0 then getgenv().TotalFarmed = getgenv().TotalFarmed + diff end
+    getgenv().LastCandies = cur
+    return getgenv().TotalFarmed
+end
 local plr = game.Players.LocalPlayer
 local function GetCoinsBag()
     local pcFull = plr.PlayerGui.MainGUI:FindFirstChild("Lobby")
@@ -73,14 +82,14 @@ end
 local function CheckStartGame() for i1, v1 in ipairs(workspace:GetDescendants()) do if v1:GetAttribute("MapID") then return true end end return false end
 local startTime = tick()
 task.spawn(function()
-	while task.wait(10) do
+	while task.wait(1) do
 		local elapsed = tick() - startTime
 		local hours = math.floor(elapsed / 3600)
 		local minutes = math.floor((elapsed % 3600) / 60)
 		local seconds = math.floor(elapsed % 60)
 		local playTime = string.format("%02dh %02dm %02ds", hours, minutes, seconds)
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
-		if statLabels["Total Candies"] then statLabels["Total Candies"].Text = "Total Candies: " .. tostring(GetDataHalloween()) end
+		if statLabels["Total Candies"] then statLabels["Total Candies"].Text = "Total Candies: " .. tostring(GetDataHalloween()) .. "("..tostring(TrackFarmedCandies())..")" end
         if statLabels["Coins Bag"] then statLabels["Coins Bag"].Text = "Coins Bag: " .. tostring(GetCoinsBag()) end
         if statLabels["Game Started"] then statLabels["Game Started"].Text = "Game Started: " .. tostring(CheckStartGame()) end
 	end
