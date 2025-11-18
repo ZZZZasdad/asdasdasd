@@ -66,13 +66,15 @@ local function TrackFarmedCandies()
 end
 local plr = game.Players.LocalPlayer
 local function GetCoinsBag()
-    local pcFull = plr.PlayerGui.MainGUI:FindFirstChild("Lobby")
+    local pcFull = plr.PlayerGui:FindFirstChild("MainGUI") and
+        plr.PlayerGui.MainGUI:FindFirstChild("Lobby")
         and plr.PlayerGui.MainGUI.Lobby:FindFirstChild("Dock")
         and plr.PlayerGui.MainGUI.Lobby.Dock:FindFirstChild("CoinBags")
         and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container
         and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.Candy
         and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.Candy.CurrencyFrame.Icon.Coins
-    local mobileFull = plr.PlayerGui.MainGUI:FindFirstChild("Game")
+    local mobileFull = plr.PlayerGui:FindFirstChild("MainGUI")
+        and plr.PlayerGui.MainGUI:FindFirstChild("Game")
         and plr.PlayerGui.MainGUI.Game:FindFirstChild("CoinBags")
         and plr.PlayerGui.MainGUI.Game.CoinBags.Container
         and plr.PlayerGui.MainGUI.Game.CoinBags.Container.Candy
