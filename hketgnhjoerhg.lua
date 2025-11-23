@@ -11,7 +11,7 @@ for i, v in Workspace:GetChildren() do
     elseif v.Name == "Players" then
         for i1, v1 in v:GetChildren() do if v1.Name ~= plr.Name then v1:Destroy() end end
     elseif v.Name == "ScriptedMap" then
-        for i1, v1 in v:GetChildren() do if v1.Name ~= "Countdowns" and v1.Name ~= "Brainrots" and v1.Name ~= "PlantPantry" then v1:Destroy() end end
+        for i1, v1 in v:GetChildren() do if v1.Name ~= "Countdowns" and v1.Name ~= "Brainrots" and v1.Name ~= "CorruptedPlantPantry" then v1:Destroy() end end
     end
 end
 Workspace.Players.ChildAdded:Connect(function(v) if v.Name ~= plr.Name then v:Destroy() end end)
