@@ -64,3 +64,4 @@ task.spawn(function()
         if statLabels["Gun Mastery"] then statLabels["Gun Mastery"].Text = "Gun Mastery: " .. tostring(GetData("GunMastery")) end
 	end
 end)
+getgenv().UI_Loaded = true
