@@ -8,8 +8,6 @@ Workspace.PlayerCharacters.ChildAdded:Connect(function(v) if v.Name ~= plr.Name 
 for i, v in Players:GetChildren() do if v.Name ~= plr.Name then v:Destroy() end end
 Players.ChildAdded:Connect(function(v) if v.Name ~= plr.Name then v:Destroy() end end)
 Lighting:ClearAllChildren()
-for _, v in ipairs(plr.PlayerGui:GetChildren()) do if v:IsA("ScreenGui") then v.Enabled = false elseif v:IsA("GuiObject") then v.Visible = false end end
-plr.PlayerGui.ChildAdded:Connect(function(v) if v:IsA("ScreenGui") then v.Enabled = false elseif v:IsA("GuiObject") then v.Visible = false end end)
 for i, v in next, Workspace:GetDescendants() do pcall(function() v.Transparency = 1 end) end
 Workspace.DescendantAdded:Connect(function(v) pcall(function() v.Transparency = 1 end) end)
 Workspace.ClientAnimatorThrottling = Enum.ClientAnimatorThrottlingMode.Enabled
