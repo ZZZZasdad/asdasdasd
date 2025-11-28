@@ -26,7 +26,7 @@ title.TextSize = 50
 title.TextColor3 = Color3.fromRGB(175, 187, 230)
 title.Name = tostring(math.random(100000,999999))
 title.Parent = frame
-local stats = {"Play Time", "Peli", "Legendary Bait"}
+local stats = {"Play Time", "Peli", "Legendary Bait","Legendary Fishes"}
 local statLabels = {}
 local colors = {
     Color3.fromRGB(255, 255, 255),
@@ -59,6 +59,14 @@ function GetFish()
     if type(inv) == "string" then inv = HttpService:JSONDecode(inv) end
     return inv["Legendary Fish Bait"] or 0
 end
+local LegendaryFish = {'Golden Tigerfin','Golden Ribbon Angelfish','Golden Polka Puffer','Swordfish',"Jack-O'-Bite",'Dark Skeletal Shark','Anglerfish'}
+local function GetFishes()
+    local inv = StatsData.Inventory.Inventory.Value
+    if type(inv) == "string" then inv = HttpService:JSONDecode(inv) end
+    local c = 0
+    for _, name in ipairs(LegendaryFish) do if inv[name] then c = c + inv[name] end end
+    return c
+end
 local startTime = tick()
 task.spawn(function()
 	while task.wait(1) do
@@ -70,6 +78,7 @@ task.spawn(function()
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
 		if statLabels["Peli"] then statLabels["Peli"].Text = "Peli: " .. tostring(GetData("Peli")) end
         if statLabels["Legendary Bait"] then statLabels["Legendary Bait"].Text = "Legendary Bait: " .. tostring(GetFish()) end
+        if statLabels["Legendary Fishes"] then statLabels["Legendary Fishes"].Text = "Legendary Fishes: " .. tostring(GetFishes()) end
 	end
 end)
 getgenv().UI_Loaded = true
