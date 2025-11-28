@@ -26,7 +26,7 @@ title.TextSize = 50
 title.TextColor3 = Color3.fromRGB(175, 187, 230)
 title.Name = tostring(math.random(100000,999999))
 title.Parent = frame
-local stats = {"Play Time", "Peli", "Legendary Fish Bait"}
+local stats = {"Play Time", "Peli", "Legendary Bait"}
 local statLabels = {}
 local colors = {
     Color3.fromRGB(255, 255, 255),
@@ -69,7 +69,7 @@ task.spawn(function()
 		local playTime = string.format("%02dh %02dm %02ds", hours, minutes, seconds)
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
 		if statLabels["Peli"] then statLabels["Peli"].Text = "Peli: " .. tostring(GetData("Peli")) end
-        if statLabels["Legendary Fish Bait"] then statLabels["Legendary Fish Bait"].Text = "Legendary Fish Bait: " .. tostring(GetFish()) end
+        if statLabels["Legendary Bait"] then statLabels["Legendary Bait"].Text = "Legendary Bait: " .. tostring(GetFish()) end
 	end
 end)
 getgenv().UI_Loaded = true
