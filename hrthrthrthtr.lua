@@ -81,4 +81,14 @@ task.spawn(function()
         if statLabels["Legendary Fishes"] then statLabels["Legendary Fishes"].Text = "Legendary Fishes: " .. tostring(GetFishes()) end
 	end
 end)
+local UserInputService = game:GetService("UserInputService")
+local uiHidden, origTrans = false, frame.BackgroundTransparency
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed or input.KeyCode ~= Enum.KeyCode.K then return end
+    uiHidden = not uiHidden
+    game:GetService("RunService"):Set3dRenderingEnabled(uiHidden)
+    frame.BackgroundTransparency = uiHidden and 1 or origTrans
+    title.TextTransparency = uiHidden and 0.5 or 0
+    for _, label in pairs(statLabels) do label.TextTransparency = uiHidden and 0.5 or 0 end
+end)
 getgenv().UI_Loaded = true
