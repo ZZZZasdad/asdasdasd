@@ -26,9 +26,10 @@ title.TextSize = 50
 title.TextColor3 = Color3.fromRGB(175, 187, 230)
 title.Name = tostring(math.random(100000,999999))
 title.Parent = frame
-local stats = {"Play Time", "Level", "Peli", "Gun Mastery"}
+local stats = {"Play Time", "Level", "Peli", "Gun Mastery", "World Scroll"}
 local statLabels = {}
 local colors = {
+    Color3.fromRGB(255, 255, 255),
     Color3.fromRGB(255, 255, 255),
     Color3.fromRGB(255, 255, 255),
     Color3.fromRGB(255, 255, 255),
@@ -48,8 +49,13 @@ for i, stat in ipairs(stats) do
     label.Parent = frame
     statLabels[stat] = label
 end
-local Data = game:GetService("ReplicatedStorage")["Stats" .. game.Players.LocalPlayer.Name].Stats
-local function GetData(Type) local stat = Data:FindFirstChild(Type) return stat and stat.Value or 0 end
+local Data = game:GetService("ReplicatedStorage")["Stats" .. game.Players.LocalPlayer.Name]
+local function GetData(Type) local stat = Data.Stats:FindFirstChild(Type) return stat and stat.Value or 0 end
+local function GetInventoryItem(item)
+    local inv = Data.Inventory.Inventory.Value
+    if type(inv) == "string" then inv = game:GetService("HttpService"):JSONDecode(inv) end
+    return inv[item] or 0
+end
 local startTime = tick()
 task.spawn(function()
 	while task.wait(1) do
@@ -62,6 +68,7 @@ task.spawn(function()
 		if statLabels["Level"] then statLabels["Level"].Text = "Level: " .. tostring(GetData("Level")) end
         if statLabels["Peli"] then statLabels["Peli"].Text = "Peli: " .. tostring(GetData("Peli")) end
         if statLabels["Gun Mastery"] then statLabels["Gun Mastery"].Text = "Gun Mastery: " .. tostring(GetData("GunMastery")) end
+        if statLabels["World Scroll"] then statLabels["World Scroll"].Text = "World Scroll: " .. GetInventoryItem("World Scroll") end
 	end
 end)
 getgenv().UI_Loaded = true
