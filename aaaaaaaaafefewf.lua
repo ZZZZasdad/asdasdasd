@@ -68,7 +68,7 @@ task.spawn(function()
 		if statLabels["Level"] then statLabels["Level"].Text = "Level: " .. tostring(GetData("Level")) end
         if statLabels["Peli"] then statLabels["Peli"].Text = "Peli: " .. tostring(GetData("Peli")) end
         if statLabels["Gun Mastery"] then statLabels["Gun Mastery"].Text = "Gun Mastery: " .. tostring(GetData("GunMastery")) end
-        if statLabels["World Scroll"] then statLabels["World Scroll"].Text = "World Scroll: " .. GetInventoryItem("World Scroll") end
+        if statLabels["World Scroll"] then statLabels["World Scroll"].Text = "Scroll: " .. GetInventoryItem("World Scroll") end
 	end
 end)
 local UserInputService = game:GetService("UserInputService")
