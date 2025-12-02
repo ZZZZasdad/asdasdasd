@@ -4,7 +4,6 @@ local Players = game:GetService("Players")
 local Lighting = game:GetService("Lighting")
 local plr = game.Players.LocalPlayer
 local Terrain = Workspace.Terrain
-game:GetService("ReplicatedStorage").Effects:Destroy()
 for i1,v1 in ipairs(workspace.Effects:GetChildren()) do if v1:IsA("Part") or string.find(v1.Name,"Model") then v1:Destroy() end end
 workspace.Effects.ChildAdded:Connect(function(v1) if v1:IsA("Part") or string.find(v1.Name,"Model") then v1:Destroy() end end)
 plr.Backpack.Movements:Destroy()
