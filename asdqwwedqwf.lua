@@ -4,7 +4,7 @@ local Players = game:GetService("Players")
 local Lighting = game:GetService("Lighting")
 local plr = game.Players.LocalPlayer
 local Terrain = Workspace.Terrain
-local function cleanMiniHollow(model) if model:IsA("Model") and model.Name:match("MiniHollow") then for _,c in ipairs(model:GetChildren()) do if c.Name ~= "RootPart" and c.Name ~= "Hitbox" thenc:Destroy() end end end end
+local function cleanMiniHollow(model) if model:IsA("Model") and model.Name:match("MiniHollow") then for _,c in ipairs(model:GetChildren()) do if c.Name ~= "RootPart" and c.Name ~= "Hitbox" then c:Destroy() end end end end
 for _,v in ipairs(workspace.Effects:GetChildren()) do cleanMiniHollow(v) end
 workspace.Effects.ChildAdded:Connect(cleanMiniHollow)
 for i1,v1 in ipairs(workspace.Effects:GetChildren()) do if v1:IsA("Part") or string.find(v1.Name,"Model") then v1:Destroy() end end
