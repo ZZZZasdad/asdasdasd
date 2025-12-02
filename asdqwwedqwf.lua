@@ -4,8 +4,9 @@ local Players = game:GetService("Players")
 local Lighting = game:GetService("Lighting")
 local plr = game.Players.LocalPlayer
 local Terrain = Workspace.Terrain
-for i1,v1 in ipairs(Workspace.Effects:GetChildren()) do if v1:IsA("Part") then task.wait(0.5) v1:Destroy() end end
-Workspace.Effects.ChildAdded:Connect(function(v1) if v1:IsA("Part") then task.wait(0.5) v1:Destroy() end end)
+for i1,v1 in ipairs(Workspace.Effects:GetChildren()) do if v1:IsA("Part") then v1:Destroy() end end
+Workspace.Effects.ChildAdded:Connect(function(v1) if v1:IsA("Part") then v1:Destroy() end end)
+plr.Backpack.Movements:Destroy()
 Workspace.PlayerCharacters.ChildAdded:Connect(function(v) if v.Name ~= plr.Name then v:Destroy() end end)
 for i, v in Players:GetChildren() do if v.Name ~= plr.Name then v:Destroy() end end
 Players.ChildAdded:Connect(function(v) if v.Name ~= plr.Name then v:Destroy() end end)
