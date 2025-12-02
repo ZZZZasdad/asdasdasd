@@ -68,7 +68,7 @@ task.spawn(function()
 		local playTime = string.format("%02dh %02dm %02ds", hours, minutes, seconds)
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
 		if statLabels["Level"] then statLabels["Level"].Text = "Level: " .. tostring(GetData("Level")) end
-        if statLabels["Mythic Chest"] then statLabels["Mythic Chest"].Text = "Mythic Chest: " .. tostring(GetInventoryData("Mythical Fruit Chest")) end
+        if statLabels["Mythic Chest"] then statLabels["Mythic Chest"].Text = "Chest: " .. tostring(GetInventoryData("Mythical Fruit Chest")) end
 	end
 end)
 local UserInputService = game:GetService("UserInputService")
