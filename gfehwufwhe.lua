@@ -26,9 +26,10 @@ title.TextSize = 50
 title.TextColor3 = Color3.fromRGB(175, 187, 230)
 title.Name = tostring(math.random(100000,999999))
 title.Parent = frame
-local stats = {"Play Time", "Level", "Mythic Chest"}
+local stats = {"Play Time","Name","Level", "Mythic Chest"}
 local statLabels = {}
 local colors = {
+    Color3.fromRGB(255, 255, 255),
     Color3.fromRGB(255, 255, 255),
     Color3.fromRGB(255, 255, 255),
     Color3.fromRGB(255, 255, 255),
@@ -59,6 +60,7 @@ function GetInventoryData(Item)
     return inv[Item] or 0
 end
 local startTime = tick()
+local name = plr.Name
 task.spawn(function()
 	while task.wait(1) do
 		local elapsed = tick() - startTime
@@ -67,6 +69,7 @@ task.spawn(function()
 		local seconds = math.floor(elapsed % 60)
 		local playTime = string.format("%02dh %02dm %02ds", hours, minutes, seconds)
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
+        if statLabels["Name"] then statLabels["Name"].Text = "Name: " .. tostring(name) end
 		if statLabels["Level"] then statLabels["Level"].Text = "Level: " .. tostring(GetData("Level")) end
         if statLabels["Mythic Chest"] then statLabels["Mythic Chest"].Text = "Chest: " .. tostring(GetInventoryData("Mythical Fruit Chest")) end
 	end
