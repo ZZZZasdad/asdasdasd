@@ -26,9 +26,10 @@ title.TextSize = 50
 title.TextColor3 = Color3.fromRGB(175, 187, 230)
 title.Name = tostring(math.random(100000,999999))
 title.Parent = frame
-local stats = {"Play Time","Name","Level", "Mythic Chest"}
+local stats = {"Play Time","Name","Level","Peli","Chest"}
 local statLabels = {}
 local colors = {
+    Color3.fromRGB(255, 255, 255),
     Color3.fromRGB(255, 255, 255),
     Color3.fromRGB(255, 255, 255),
     Color3.fromRGB(255, 255, 255),
@@ -70,8 +71,9 @@ task.spawn(function()
 		local playTime = string.format("%02dh %02dm %02ds", hours, minutes, seconds)
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
         if statLabels["Name"] then statLabels["Name"].Text = "Name: " .. tostring(name) end
+        if statLabels["Peli"] then statLabels["Peli"].Text = "Peli: " .. tostring(GetData("Peli")) end
 		if statLabels["Level"] then statLabels["Level"].Text = "Level: " .. tostring(GetData("Level")) end
-        if statLabels["Mythic Chest"] then statLabels["Mythic Chest"].Text = "Chest: " .. tostring(GetInventoryData("Mythical Fruit Chest")) end
+        if statLabels["Chest"] then statLabels["Chest"].Text = "Chest: " .. tostring(GetInventoryData("Mythical Fruit Chest")) end
 	end
 end)
 local UserInputService = game:GetService("UserInputService")
