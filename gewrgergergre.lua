@@ -48,22 +48,6 @@ for i, stat in ipairs(stats) do
     label.Parent = frame
     statLabels[stat] = label
 end
-local ProfileData = require(game:GetService("ReplicatedStorage"):WaitForChild("Modules"):WaitForChild("ProfileData"))
-local function GetDataHalloween()
-	if ProfileData and ProfileData.Materials then
-		return ProfileData.Materials.Owned.SnowTokens2025 or 0
-	end
-	return 0
-end
-local function TrackFarmedCandies()
-    getgenv().LastCandies = getgenv().LastCandies or GetDataHalloween()
-    getgenv().TotalFarmed = getgenv().TotalFarmed or 0
-    local cur = GetDataHalloween()
-    local diff = cur - getgenv().LastCandies
-    if diff > 0 then getgenv().TotalFarmed = getgenv().TotalFarmed + diff end
-    getgenv().LastCandies = cur
-    return getgenv().TotalFarmed
-end
 local plr = game.Players.LocalPlayer
 local function GetCoinsBag()
     local pcFull = plr.PlayerGui:FindFirstChild("MainGUI") and
@@ -71,14 +55,14 @@ local function GetCoinsBag()
         and plr.PlayerGui.MainGUI.Lobby:FindFirstChild("Dock")
         and plr.PlayerGui.MainGUI.Lobby.Dock:FindFirstChild("CoinBags")
         and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container
-        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.SnowToken
-        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.SnowToken.CurrencyFrame.Icon.Coins
+        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.CoinBags
+        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.CoinBags.CurrencyFrame.Icon.Coins
     local mobileFull = plr.PlayerGui:FindFirstChild("MainGUI")
         and plr.PlayerGui.MainGUI:FindFirstChild("Game")
         and plr.PlayerGui.MainGUI.Game:FindFirstChild("CoinBags")
         and plr.PlayerGui.MainGUI.Game.CoinBags.Container
-        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.SnowToken
-        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.SnowToken.CurrencyFrame.Icon.Coins
+        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.CoinBags
+        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.CoinBags.CurrencyFrame.Icon.Coins
     return (pcFull and pcFull.ContentText) or (mobileFull and mobileFull.ContentText)
 end
 local function CheckStartGame() for i1, v1 in ipairs(workspace:GetDescendants()) do if v1:GetAttribute("MapID") then return true end end return false end
@@ -91,7 +75,6 @@ task.spawn(function()
 		local seconds = math.floor(elapsed % 60)
 		local playTime = string.format("%02dh %02dm %02ds", hours, minutes, seconds)
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
-		if statLabels["Total SnowToken"] then statLabels["Total SnowToken"].Text = "Total SnowToken: " .. tostring(GetDataHalloween()) .. "("..tostring(TrackFarmedCandies())..")" end
         if statLabels["Coins Bag"] then statLabels["Coins Bag"].Text = "Coins Bag: " .. tostring(GetCoinsBag()) end
         if statLabels["Game Started"] then statLabels["Game Started"].Text = "Game Started: " .. tostring(CheckStartGame()) end
 	end
