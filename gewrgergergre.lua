@@ -55,14 +55,14 @@ local function GetCoinsBag()
         and plr.PlayerGui.MainGUI.Lobby:FindFirstChild("Dock")
         and plr.PlayerGui.MainGUI.Lobby.Dock:FindFirstChild("CoinBags")
         and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container
-        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.CoinBags
-        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.CoinBags.CurrencyFrame.Icon.Coins
+        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.Coin
+        and plr.PlayerGui.MainGUI.Lobby.Dock.CoinBags.Container.Coin.CurrencyFrame.Icon.Coins
     local mobileFull = plr.PlayerGui:FindFirstChild("MainGUI")
         and plr.PlayerGui.MainGUI:FindFirstChild("Game")
         and plr.PlayerGui.MainGUI.Game:FindFirstChild("CoinBags")
         and plr.PlayerGui.MainGUI.Game.CoinBags.Container
-        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.CoinBags
-        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.CoinBags.CurrencyFrame.Icon.Coins
+        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.Coin
+        and plr.PlayerGui.MainGUI.Game.CoinBags.Container.Coin.CurrencyFrame.Icon.Coins
     return (pcFull and pcFull.ContentText) or (mobileFull and mobileFull.ContentText)
 end
 local function CheckStartGame() for i1, v1 in ipairs(workspace:GetDescendants()) do if v1:GetAttribute("MapID") then return true end end return false end
