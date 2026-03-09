@@ -69,7 +69,7 @@ task.spawn(function()
 		local playTime = string.format("%02dh %02dm %02ds", hours, minutes, seconds)
 		if statLabels["Play Time"] then statLabels["Play Time"].Text = "Play Time: " .. playTime end
         if statLabels["Name"] then statLabels["Name"].Text = "Name: " .. tostring(name) end
-		if statLabels["Quest"] then statLabels["Quest"].Text = "Quest: " .. tostring(GetFloor()) end
+		if statLabels["Quest"] then statLabels["Quest"].Text = "Quest: " .. tostring((GetFloor() or "Cant Get Data")) end
 	end
 end)
 local UserInputService = game:GetService("UserInputService")
