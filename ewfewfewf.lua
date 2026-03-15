@@ -1,71 +1,42 @@
 getgenv().LowCPU = true
 local Workspace = game:GetService("Workspace")
 local Lighting = game:GetService("Lighting")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Effects = ReplicatedStorage:FindFirstChild("Effects")
+local ClientImpacts = ReplicatedStorage:FindFirstChild("ClientImpacts")
+if Effects and ClientImpacts then Effects:Destroy() ClientImpacts:Destroy() end
 local Terrain = Workspace.Terrain
 Lighting:ClearAllChildren()
-for i, v in next, Workspace:GetDescendants() do pcall(function() v.Transparency = 1 end) end
-Workspace.DescendantAdded:Connect(function(v) pcall(function() v.Transparency = 1 end) end)
-Workspace.ClientAnimatorThrottling = Enum.ClientAnimatorThrottlingMode.Enabled
-Workspace.InterpolationThrottling = Enum.InterpolationThrottlingMode.Enabled
-settings():GetService("RenderSettings").EagerBulkExecution = false
-Workspace.LevelOfDetail = Enum.ModelLevelOfDetail.Disabled
+local function optimize(v)
+    if v:IsA("BasePart") then v.Material = Enum.Material.Plastic v.Reflectance = 0 v.Transparency = 1 v.CastShadow = false end
+    if v:IsA("Decal") or v:IsA("Texture") then v.Transparency = 1
+    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then v.Lifetime = NumberRange.new(0) v.Enabled = false
+    elseif v:IsA("Explosion") then v.BlastPressure = 1 v.BlastRadius = 1
+    elseif v:IsA("Fire") or v:IsA("Smoke") or v:IsA("Sparkles") or v:IsA("SpotLight") then v.Enabled = false
+    elseif v:IsA("MeshPart") then v.Material = Enum.Material.Plastic v.Reflectance = 0 v.TextureID = "" v.Transparency = 1
+    elseif v:IsA("SpecialMesh") then v.TextureId = ""
+    elseif v:IsA("SurfaceAppearance") then v:Destroy()
+    elseif v:IsA("Sound") then v.Volume = 0
+    elseif v:IsA("Animator") then for _,track in ipairs(v:GetPlayingAnimationTracks()) do track:Stop() end v.AnimationPlayed:Connect(function(track) track:Stop() end)
+    elseif v:IsA("Humanoid") or v:IsA("AnimationController") then local animator = v:FindFirstChildOfClass("Animator") if animator then for _,track in ipairs(animator:GetPlayingAnimationTracks()) do track:Stop() end animator.AnimationPlayed:Connect(function(track) track:Stop() end) end
+    end
+end
+for _,v in ipairs(Workspace:GetDescendants()) do pcall(optimize,v) end
+Workspace.DescendantAdded:Connect(function(v) pcall(optimize,v) end)
 Lighting.GlobalShadows = false
-settings().Rendering.QualityLevel = "Level01"
+Lighting.FogEnd = 9e9
+Lighting.Brightness = 0
+Lighting.EnvironmentDiffuseScale = 0
+Lighting.EnvironmentSpecularScale = 0
+for _,v in Lighting:GetChildren() do if v:IsA("PostEffect") then v.Enabled = false end end
+Lighting.ChildAdded:Connect(function(v) if v:IsA("PostEffect") then v.Enabled = false end end)
 Terrain.WaterWaveSize = 0
 Terrain.WaterWaveSpeed = 0
 Terrain.WaterReflectance = 0
 Terrain.WaterTransparency = 0
-Lighting.GlobalShadows = false
-Lighting.FogEnd = 9e9
-Lighting.Brightness = 0
-for i, v in pairs(game:GetDescendants()) do
-    if v.ClassName == "WedgePart" or v.ClassName == "Terrain" or v.ClassName == "MeshPart" then
-        v.BrickColor = BrickColor.new(155, 155, 155)
-        v.Material = "Plastic"
-        v.Transparency = 1
-    end
-    if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
-        v.Material = "Plastic"
-        v.Reflectance = 0
-    elseif v:IsA("Decal") or v:IsA("Texture") then
-        v.Transparency = 1
-    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-        v.Lifetime = NumberRange.new(0)
-    elseif v:IsA("Explosion") then
-        v.BlastPressure = 1
-        v.BlastRadius = 1
-    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
-        v.Enabled = false
-    elseif v:IsA("MeshPart") then
-        v.Material = "Plastic"
-        v.Reflectance = 0
-        v.TextureID = 10385902758728957
-    end
-end
-Workspace.ChildAdded:Connect(function(v)
-    if v.ClassName == "WedgePart" or v.ClassName == "Terrain" or v.ClassName == "MeshPart" then
-        v.BrickColor = BrickColor.new(155, 155, 155)
-        v.Material = "Plastic"
-        v.Transparency = 1
-    end
-    if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
-        v.Material = "Plastic"
-        v.Reflectance = 0
-    elseif v:IsA("Decal") or v:IsA("Texture") then
-        v.Transparency = 1
-    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-        v.Lifetime = NumberRange.new(0)
-    elseif v:IsA("Explosion") then
-        v.BlastPressure = 1
-        v.BlastRadius = 1
-    elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
-        v.Enabled = false
-    elseif v:IsA("MeshPart") then
-        v.Material = "Plastic"
-        v.Reflectance = 0
-        v.TextureID = 10385902758728957
-    end
-end)
-for i, e in pairs(Lighting:GetChildren()) do if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then e.Enabled = false end end
-Lighting.ChildAdded:Connect(function(v) if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then v.Enabled = false end end)
+Workspace.ClientAnimatorThrottling = Enum.ClientAnimatorThrottlingMode.Enabled
+Workspace.InterpolationThrottling = Enum.InterpolationThrottlingMode.Enabled
+Workspace.LevelOfDetail = Enum.ModelLevelOfDetail.Disabled
+settings():GetService("RenderSettings").EagerBulkExecution = false
+settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
 getgenv().LowCPU_Loaded = true
