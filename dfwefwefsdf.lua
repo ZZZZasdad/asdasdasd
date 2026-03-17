@@ -135,8 +135,9 @@ if game.PlaceId == 77747658251236 then
     end
     local function GetMobs(QuestName)
         local quest = QuestConfig.RepeatableQuests[QuestName]
-        if not quest then return {} end
+        if not quest then return end
         local EnemyName = quest.requirements[1].npcType
+        if QuestName == "QuestNPC14" then EnemyName = "Slime" end
         local isBoss = EnemyName:find("Boss")
         for _, n in ipairs(NPCs:GetChildren()) do
             if IsActive(n) then
